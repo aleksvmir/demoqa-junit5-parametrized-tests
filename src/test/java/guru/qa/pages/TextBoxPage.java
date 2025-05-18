@@ -16,37 +16,31 @@ public class TextBoxPage {
 
     public TextBoxPage openPage() {
         open("/text-box");
-
         return this;
     }
 
     public TextBoxPage setName(String value) {
         nameInput.setValue(value);
-
         return this;
     }
 
     public TextBoxPage setMail(String value) {
         mailInput.setValue(value);
-
         return this;
     }
 
     public TextBoxPage setCurrentAddress(String value) {
         currentAddressInput.setValue(value);
-
         return this;
     }
 
     public TextBoxPage setPermanentAddress(String value) {
         permanentAddressInput.setValue(value);
-
         return this;
     }
 
     public TextBoxPage submitForm() {
         submitButton.click();
-
         return this;
     }
 

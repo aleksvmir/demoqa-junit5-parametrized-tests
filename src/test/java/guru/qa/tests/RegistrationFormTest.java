@@ -1,6 +1,6 @@
 package guru.qa.tests;
 
-import guru.qa.commonConfig.TestConfig;
+import guru.qa.commonconfig.TestConfig;
 import guru.qa.pages.RegistrationPage;
 import org.junit.jupiter.api.Test;
 

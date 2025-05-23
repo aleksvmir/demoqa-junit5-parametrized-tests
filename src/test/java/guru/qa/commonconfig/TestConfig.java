@@ -1,4 +1,4 @@
-package guru.qa.commonConfig;
+package guru.qa.commonconfig;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.AfterAll;
@@ -13,7 +13,6 @@ public class TestConfig {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.timeout = 5000;
     }
 
     @AfterAll

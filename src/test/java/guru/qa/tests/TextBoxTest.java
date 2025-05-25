@@ -2,23 +2,28 @@ package guru.qa.tests;
 
 import guru.qa.commonconfig.TestConfig;
 import guru.qa.pages.TextBoxPage;
+import guru.qa.utils.DataFactory;
+import guru.qa.utils.TextBoxFormData;
 import org.junit.jupiter.api.Test;
 
 public class TextBoxTest extends TestConfig {
 
     TextBoxPage textBoxPage = new TextBoxPage();
+    DataFactory dataFactory = new DataFactory();
 
     @Test
     void successfulFillingFormTest() {
+        TextBoxFormData formData = dataFactory.generateTextBoxData();
+
         textBoxPage.openPage()
-                .setName("Vladimir Alekseev")
-                .setMail("aetirodev@gmail.com")
-                .setCurrentAddress("Moscow, Leninsky Prospekt, 56-67")
-                .setPermanentAddress("Almaty, Prospekt Abaya, 99-77")
+                .setName(formData.getFullName())
+                .setMail(formData.getEmail())
+                .setCurrentAddress(formData.getCurrentAddress())
+                .setPermanentAddress(formData.getPermanentAddress())
                 .submitForm()
-                .checkResultBox("Name:", "Vladimir Alekseev")
-                .checkResultBox("Email:", "aetirodev@gmail.com")
-                .checkResultBox("Current Address :", "Moscow, Leninsky Prospekt, 56-67")
-                .checkResultBox("Permananet Address :", "Almaty, Prospekt Abaya, 99-77");
+                .checkResultBox("Name:", formData.getFullName())
+                .checkResultBox("Email:", formData.getEmail())
+                .checkResultBox("Current Address :", formData.getCurrentAddress())
+                .checkResultBox("Permananet Address :", formData.getPermanentAddress());
     }
 }

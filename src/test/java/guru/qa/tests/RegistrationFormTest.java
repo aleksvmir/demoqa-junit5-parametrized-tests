@@ -2,6 +2,8 @@ package guru.qa.tests;
 
 import guru.qa.commonconfig.TestConfig;
 import guru.qa.pages.RegistrationPage;
+import guru.qa.utils.StudentFormData;
+import guru.qa.utils.DataFactory;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -10,48 +12,57 @@ import static com.codeborne.selenide.Selenide.$$;
 public class RegistrationFormTest extends TestConfig {
 
     RegistrationPage registrationPage = new RegistrationPage();
+    DataFactory studentDataFactory = new DataFactory();
 
     @Test
     void fillFormWithAllDataTest() {
+        StudentFormData student = studentDataFactory.generateFullStudentFormData();
+
         registrationPage.openPage()
-                .setFirstName("Vladimir")
-                .setLastName("Alekseev")
-                .setEmail("aetirodev@gmail.com")
-                .selectGender("Male")
-                .setPhoneNumber("9001112233")
-                .setDateOfBirth("8", "February", "2000")
-                .setSubjects("History")
-                .selectHobby("Reading")
-                .uploadPicture("photo.png")
-                .setAddress("Moscow, Leninsky Prospekt, 56-67")
-                .selectState("Haryana")
-                .selectCity("Karnal")
+                .setFirstName(student.getFirstName())
+                .setLastName(student.getLastName())
+                .setEmail(student.getEmail())
+                .selectGender(student.getGender())
+                .setPhoneNumber(student.getPhoneNumber())
+                .setDateOfBirth(student.getDay(), student.getMonth(), student.getYear())
+                .setSubjects(student.getSubject())
+                .selectHobby(student.getHobby())
+                .uploadPicture(student.getPictureName())
+                .setAddress(student.getAddress())
+                .selectState(student.getState())
+                .selectCity(student.getCity())
                 .submitForm();
+
         registrationPage.checkResultTable()
-                .verifyResult("Student Name", "Vladimir Alekseev")
-                .verifyResult("Student Email", "aetirodev@gmail.com")
-                .verifyResult("Gender", "Male")
-                .verifyResult("Mobile", "9001112233")
-                .verifyResult("Date of Birth", "8 February,2000")
-                .verifyResult("Subjects", "History")
-                .verifyResult("Hobbies", "Reading")
-                .verifyResult("Picture", "photo.png")
-                .verifyResult("Address", "Moscow, Leninsky Prospekt, 56-67")
-                .verifyResult("State and City", "Haryana Karnal");
+                .verifyResult("Student Name", student.getFirstName() + " " + student.getLastName())
+                .verifyResult("Student Email", student.getEmail())
+                .verifyResult("Gender", student.getGender())
+                .verifyResult("Mobile", student.getPhoneNumber())
+                .verifyResult("Date of Birth", student.getDay() + " " + student.getMonth() + "," + student.getYear())
+                .verifyResult("Subjects", student.getSubject())
+                .verifyResult("Hobbies", student.getHobby())
+                .verifyResult("Picture", student.getPictureName())
+                .verifyResult("Address", student.getAddress())
+                .verifyResult("State and City", student.getState() + " " + student.getCity());
     }
 
     @Test
     void fillFormMinimalRequiredDataTest() {
+        StudentFormData student = studentDataFactory.generateMinimalStudentFormData();
+
         registrationPage.openPage()
-                .setFirstName("Vladimir")
-                .setLastName("Alekseev")
-                .selectGender("Male")
-                .setPhoneNumber("9001112233")
+                .setFirstName(student.getFirstName())
+                .setLastName(student.getLastName())
+                .selectGender(student.getGender())
+                .setPhoneNumber(student.getPhoneNumber())
+                .setDateOfBirth(student.getDay(), student.getMonth(), student.getYear())
                 .submitForm();
+
         registrationPage.checkResultTable()
-                .verifyResult("Student Name", "Vladimir Alekseev")
-                .verifyResult("Gender", "Male")
-                .verifyResult("Mobile", "9001112233");
+                .verifyResult("Student Name", student.getFirstName() + " " + student.getLastName())
+                .verifyResult("Gender", student.getGender())
+                .verifyResult("Mobile", student.getPhoneNumber())
+                .verifyResult("Date of Birth", student.getDay() + " " + student.getMonth() + "," + student.getYear());
     }
 
     @Test

@@ -1,8 +1,8 @@
 package guru.qa.tests;
 
 import guru.qa.commonconfig.TestConfig;
+import guru.qa.data.enums.Gender;
 import guru.qa.pages.RegistrationPage;
-import guru.qa.utils.Gender;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.*;
 import org.junit.jupiter.api.DisplayName;

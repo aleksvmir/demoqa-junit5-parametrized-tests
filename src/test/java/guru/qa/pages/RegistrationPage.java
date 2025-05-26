@@ -3,6 +3,7 @@ package guru.qa.pages;
 import com.codeborne.selenide.SelenideElement;
 import guru.qa.pages.components.CalendarComponent;
 import guru.qa.pages.components.CheckResultComponent;
+import static com.codeborne.selenide.Condition.visible;
 
 import java.io.File;
 
@@ -96,7 +97,16 @@ public class RegistrationPage {
 
     public RegistrationPage submitForm() {
         submitButton.scrollTo().click();
+        $(".modal-header").shouldBe(visible);
         return this;
+    }
+
+    public RegistrationPage setBasicInfo(String firstName, String lastName, String gender, String phone) {
+        return this
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .selectGender(gender)
+                .setPhoneNumber(phone);
     }
 
     public CheckResultComponent checkResultTable() {

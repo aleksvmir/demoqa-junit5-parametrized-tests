@@ -1,6 +1,6 @@
-package guru.qa.utils;
+package guru.qa.data.enums;
 
-public enum Gender {
+public enum GenderType {
     MALE,
     FEMALE,
     OTHER;
